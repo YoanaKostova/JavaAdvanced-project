@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS DEPARTMENT (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS EMPLOYEE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstname varchar(50) NOT NULL,
+    lastname varchar(50) NOT NULL,
+    address varchar(50) NOT NULL,
+    salary DOUBLE NOT NULL,
+    departmentid INT NOT NULL,
+    FOREIGN KEY (departmentid) REFERENCES DEPARTMENT(id)
+);
+
+CREATE TABLE IF NOT EXISTS PROJECT (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(100) NOT NULL,
+    departmentid INT NOT NULL,
+    FOREIGN KEY (departmentid) REFERENCES DEPARTMENT(id)
+);
