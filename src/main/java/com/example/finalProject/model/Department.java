@@ -1,5 +1,7 @@
 package com.example.finalProject.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 
 public class Department {
@@ -8,9 +10,10 @@ public class Department {
     private Long id;
     private String name;
 
-    public Department(String name) {
-        this.name = name;
-    }
+//    @JsonCreator
+//    public Department(@JsonProperty("name") String name) {
+//        this.name = name;
+//    }
 
     public Long getId() {
         return id;

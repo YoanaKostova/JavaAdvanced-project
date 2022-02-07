@@ -5,7 +5,6 @@ import com.example.finalProject.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-// да проверя дали всичко работи
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
@@ -38,7 +37,7 @@ public class EmployeeController {
         return employeeService.create(emp);
     }
 
-    //???
+    //РАБОТИ!!!
     @PutMapping("/{id}")
     public Employee update(@PathVariable("id") Long id, @RequestBody Employee emp){
         return employeeService.update(emp,id);

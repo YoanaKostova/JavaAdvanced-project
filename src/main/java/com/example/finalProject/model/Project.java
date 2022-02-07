@@ -8,12 +8,11 @@ public class Project {
     private Long id;
     private String name;
     private Long departmentid;
-    //private Department department;
 
 
-    public Project(String name, Long departmentId) {
+    public Project(String name, Long departmentid) {
         this.name = name;
-        this.departmentid = departmentId;
+        this.departmentid = departmentid;
     }
 
     public Long getId() {
@@ -32,11 +31,11 @@ public class Project {
         this.name = name;
     }
 
-    public Long getDepartmentId() {
+    public Long getDepartmentid() {
         return departmentid;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentid = departmentId;
+    public void setDepartmentid(Long departmentid) {
+        this.departmentid = departmentid;
     }
 }

@@ -22,16 +22,16 @@ public class DepartmentController {
         return departmentService.findById(id);
     }
 
+//    @PostMapping("/")
+//    public Department save(@RequestParam String name){
+//        Department department = new Department(name);
+//        return departmentService.save(department);
+//    }
+
     @PostMapping("/")
-    public Department save(@RequestParam String name){
-        Department department = new Department(name);
+    public Department create(@RequestBody Department department){
         return departmentService.save(department);
     }
-
-    //    @PostMapping("/")
-    //    public Department save(@RequestBody Department dep){
-    //        return departmentService.save(dep);
-    //    }
 
     //???
     @PutMapping("/{id}")
