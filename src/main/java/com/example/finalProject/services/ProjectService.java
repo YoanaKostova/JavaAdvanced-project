@@ -7,6 +7,10 @@ import com.example.finalProject.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 @Service
 public class ProjectService {
 
@@ -22,6 +26,10 @@ public class ProjectService {
 
     public Project findById(Long id){
         return projectRepository.findById(id).get();
+    }
+
+    public Iterable<Project> findByName(String name){
+        return projectRepository.findByName(name);
     }
 
     public Project create(Project project){
@@ -49,4 +57,5 @@ public class ProjectService {
     public void deleteById(Long id){
         projectRepository.deleteById(id);
     }
+
 }

@@ -5,6 +5,8 @@ import com.example.finalProject.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
@@ -13,38 +15,47 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/")
-    public Iterable<Employee> findAll(){
+    public Iterable<Employee> findAll(@RequestParam(required = false) String firstname,
+                                      @RequestParam(required = false) String lastname,
+                                      @RequestParam(required = false) Long departmentId) {
+        if (firstname != null && lastname != null) {
+            return employeeService.findByFirstnameAndLastname(firstname, lastname);
+        }
+        if (firstname != null) {
+            return employeeService.findByFirstname(firstname);
+        }
+        if (lastname != null) {
+            return employeeService.findByLastname(lastname);
+        }
+        if(departmentId != null){
+            return employeeService.allEmployeesInDepartment(departmentId);
+        }
+
         return employeeService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Employee findById(@PathVariable("id") Long id){
+    public Employee findById(@PathVariable("id") Long id) {
         return employeeService.findById(id);
     }
 
-//    @PostMapping("/")
-//    public Employee create(@RequestBody Employee emp){
-//        return employeeService.create(emp);
-//    }
-
     @PostMapping("/")
-    public Employee create(@RequestParam String firstName,
-                           @RequestParam String lastName,
-                           @RequestParam String address,
-                           @RequestParam double salary,
-                           @RequestParam Long departmentId){
-        Employee emp = new Employee(firstName, lastName,address,salary,departmentId);
+    public Employee create(@RequestBody Employee emp) {
         return employeeService.create(emp);
     }
 
-    //РАБОТИ!!!
     @PutMapping("/{id}")
-    public Employee update(@PathVariable("id") Long id, @RequestBody Employee emp){
-        return employeeService.update(emp,id);
+    public Employee update(@PathVariable("id") Long id, @RequestBody Employee emp) {
+        return employeeService.update(emp, id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id){
+    public void delete(@PathVariable("id") Long id) {
         employeeService.deleteById(id);
     }
+
+//    @GetMapping("/allEmployees")
+//    public Iterable<Employee> findEmployeesInDepartment(@RequestParam Long depId){
+//        return employeeService.allEmployeesInDepartment(depId);
+//    }
 }

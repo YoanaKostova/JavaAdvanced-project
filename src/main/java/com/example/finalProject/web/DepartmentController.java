@@ -1,6 +1,7 @@
 package com.example.finalProject.web;
 
 import com.example.finalProject.model.Department;
+import com.example.finalProject.model.Employee;
 import com.example.finalProject.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +23,21 @@ public class DepartmentController {
         return departmentService.findById(id);
     }
 
-//    @PostMapping("/")
-//    public Department save(@RequestParam String name){
-//        Department department = new Department(name);
-//        return departmentService.save(department);
-//    }
+    @GetMapping("/allEmployees")
+    public Iterable<Employee> allEmployeesInDepartment(@RequestParam Long departmentId){
+        return departmentService.allEmployeesInDepartment(departmentId);
+    }
+
+    @GetMapping("/salary/{id}")
+    public double salarySum(@PathVariable("id") Long id){
+        return departmentService.salarySum(id);
+    }
 
     @PostMapping("/")
     public Department create(@RequestBody Department department){
         return departmentService.save(department);
     }
 
-    //???
     @PutMapping("/{id}")
     public Department update(@PathVariable("id") Long id, @RequestBody Department department){
         return departmentService.update(department,id);

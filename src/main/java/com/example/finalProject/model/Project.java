@@ -9,6 +9,7 @@ public class Project {
     private String name;
     private Long departmentid;
 
+    public Project(){}
 
     public Project(String name, Long departmentid) {
         this.name = name;

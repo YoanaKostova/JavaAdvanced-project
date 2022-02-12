@@ -12,6 +12,7 @@ public class Employee {
     private Long departmentid;
     //трябва ли да имам private Department department;
 
+    public Employee(){}
 
     public Employee(String firstname, String lastname, String address, double salary, Long departmentid) {
         this.firstname = firstname;

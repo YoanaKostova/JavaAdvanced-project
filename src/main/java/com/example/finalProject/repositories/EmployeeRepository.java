@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee,Long> {
+    Iterable<Employee> findByFirstname(String firstname);
+    Iterable<Employee> findByLastname(String lastname);
+    Iterable<Employee> findByFirstnameAndLastname(String firstname, String lastname);
 }

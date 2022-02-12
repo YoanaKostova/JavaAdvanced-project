@@ -9,11 +9,12 @@ public class Department {
     @Id
     private Long id;
     private String name;
+    
+    public Department(){}
 
-//    @JsonCreator
-//    public Department(@JsonProperty("name") String name) {
-//        this.name = name;
-//    }
+    public Department(String name){
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

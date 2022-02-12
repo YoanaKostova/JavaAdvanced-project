@@ -2,9 +2,13 @@ package com.example.finalProject.services;
 
 import com.example.finalProject.model.Department;
 import com.example.finalProject.model.Employee;
+import com.example.finalProject.repositories.DepartmentRepository;
 import com.example.finalProject.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -12,8 +16,10 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+//    @Autowired
+//    private DepartmentService departmentService;
     @Autowired
-    private DepartmentService departmentService;
+    private DepartmentRepository departmentRepository;
 
     public Iterable<Employee> findAll(){
         return employeeRepository.findAll();
@@ -25,7 +31,8 @@ public class EmployeeService {
 
     public Employee create(Employee emp){
         //Department exist
-        Department department = departmentService.findById(emp.getDepartmentid());
+        //Department department = departmentService.findById(emp.getDepartmentid());
+        Department department = departmentRepository.findById(emp.getDepartmentid()).get();
         if(department == null){
             // да върна подходящ Exception
             throw new RuntimeException();
@@ -54,5 +61,29 @@ public class EmployeeService {
     public void deleteById(Long id){
         employeeRepository.deleteById(id);
     }
+
+    public Iterable<Employee> findByFirstname(String firstname){
+        return employeeRepository.findByFirstname(firstname);
+    }
+
+    public Iterable<Employee> findByLastname(String lastname){
+        return employeeRepository.findByLastname(lastname);
+    }
+
+    public Iterable<Employee> findByFirstnameAndLastname(String firstname,String lastname){
+        return employeeRepository.findByFirstnameAndLastname(firstname, lastname);
+    }
+
+    public Iterable<Employee> allEmployeesInDepartment(Long depId){
+        Iterable<Employee> allEmployees = employeeRepository.findAll();
+        List<Employee> res = new ArrayList<>();
+        for(Employee emp : allEmployees){
+            if(emp.getDepartmentid() == depId){
+                res.add(emp);
+            }
+        }
+        return res;
+    }
+
 
 }
