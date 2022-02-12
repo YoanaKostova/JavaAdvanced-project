@@ -23,6 +23,7 @@ public class DepartmentController {
         return departmentService.findById(id);
     }
 
+    //дали работи след добавяне на Exceptions
     @GetMapping("/allEmployees")
     public Iterable<Employee> allEmployeesInDepartment(@RequestParam Long departmentId){
         return departmentService.allEmployeesInDepartment(departmentId);

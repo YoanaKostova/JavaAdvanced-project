@@ -1,5 +1,6 @@
 package com.example.finalProject.services;
 
+import com.example.finalProject.exceptions.WrongArgumentsException;
 import com.example.finalProject.model.Department;
 import com.example.finalProject.model.Employee;
 import com.example.finalProject.repositories.DepartmentRepository;

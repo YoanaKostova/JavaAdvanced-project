@@ -1,5 +1,6 @@
 package com.example.finalProject.services;
 
+import com.example.finalProject.exceptions.DepartmentDoesNotExistException;
 import com.example.finalProject.exceptions.WrongArgumentsException;
 import com.example.finalProject.model.Department;
 import com.example.finalProject.model.Employee;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class DepartmentService {
@@ -25,15 +27,29 @@ public class DepartmentService {
     }
 
     public Department findById(Long id){
-        return departmentRepository.findById(id).get();
+        if(id.equals(null) || id <= 0L){
+            throw new WrongArgumentsException();
+        }
+
+        try{
+            return departmentRepository.findById(id).get();
+        } catch (NoSuchElementException e){
+            throw new DepartmentDoesNotExistException();
+        }
     }
 
     public Department save(Department department){
+        if(department.getName() == null || department.getName().trim().isEmpty()){
+            throw new WrongArgumentsException();
+        }
         return departmentRepository.save(department);
     }
 
     public Department update (Department department, Long id){
         Department foundDepartment = findById(id);
+        if(department.getName() == null || department.getName().trim().isEmpty()){
+            throw new WrongArgumentsException();
+        }
         foundDepartment.setName(department.getName());
         departmentRepository.save(foundDepartment);
         return foundDepartment;
@@ -48,11 +64,8 @@ public class DepartmentService {
     }
 
     public double salarySum(Long id){
-        Department department = departmentRepository.findById(id).get();
-        if(department == null){
-            throw new RuntimeException();
-            //Exception за несъществуващ Отдел
-        }
+        Department department = findById(id);
+
         double sum = 0;
         Iterable<Employee> allEmployees = employeeService.allEmployeesInDepartment(id);
         for (Employee emp : allEmployees) {

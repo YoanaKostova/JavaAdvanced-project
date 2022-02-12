@@ -8,9 +8,8 @@ public class Employee {
     private String firstname;
     private String lastname;
     private String address;
-    private double salary; // дали има проблем с double
+    private double salary;
     private Long departmentid;
-    //трябва ли да имам private Department department;
 
     public Employee(){}
 
