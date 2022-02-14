@@ -43,6 +43,4 @@ public class ProjectController {
         projectService.deleteById(id);
     }
 
-
-
 }
